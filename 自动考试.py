@@ -8,6 +8,8 @@
 """
 import requests
 import pandas as pd
+import time
+import random
 
 # 请求头和Cookies
 headers = {
@@ -84,6 +86,9 @@ if __name__ == '__main__':
 	# 开始做题
 	for mq in matched_questions:
 		if mq['CorrectAnswerAVal'] is not None:
+			# 随机延迟1到15秒
+			delay = random.uniform(1, 15)
+			time.sleep(delay)
 			result = submit_answer(mq['QID'], mq['CorrectAnswerAVal'])
 			print(f"QID: {mq['QID']}, Correct Answer AVal: {mq['CorrectAnswerAVal']}, Submission Result: {result}")
 		else:
