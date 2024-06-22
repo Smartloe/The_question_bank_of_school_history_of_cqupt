@@ -1,17 +1,15 @@
 import pandas as pd
-import requests
 import aiohttp
 import asyncio
 from openpyxl import load_workbook
 import os
-from concurrent.futures import ThreadPoolExecutor
 
 # 请求头和Cookies
 headers = {
 	'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0',
 }
 cookies = {
-	'JSESSIONID': 'C883D947470627C060324CD40003C307',
+	'JSESSIONID': 'C883********************003C307',  # 此处填写你的JSESSIONID，在考试网页中可以通过浏览器开发者工具查看
 }
 
 
