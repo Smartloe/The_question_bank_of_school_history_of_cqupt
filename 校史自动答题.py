@@ -4,7 +4,7 @@
 @Date:   2024/6/22 22:24
 @Last Modified by:   Chenxr
 @Last Modified time: 2024/6/22 22:24
-@Description: 
+@Description:
 """
 import requests
 import pandas as pd
@@ -16,7 +16,7 @@ headers = {
 	'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0',
 }
 cookies = {
-	'JSESSIONID': 'C883********************003C307',  # 此处填写你的JSESSIONID，在考试网页中可以通过浏览器开发者工具查看
+	'JSESSIONID': '20F13F9A11437D790D0B8D9C97AF589A',  # 此处填写你的JSESSIONID，在考试网页中可以通过浏览器开发者工具查看
 }
 
 
@@ -78,6 +78,36 @@ def finish_formal_test():
 	return response.json()
 
 
+# 查看成绩
+def get_latest_score():
+	url = 'http://172.20.2.22:8080/index/examination/myScore'
+
+	params = {
+		'page': '1',
+		'limit': '20',
+		'type': '0'
+	}
+	try:
+		response = requests.get(url, headers=headers, cookies=cookies, params=params, verify=False)
+		response.raise_for_status()  # 抛出异常以处理不良状态码
+
+		# 提取成绩列表
+		scores = response.json()['data']['list']
+
+		# 按照考试时间降序排序，获取最新的成绩
+		latest_score = max(scores, key=lambda x: x['TestTime'])
+
+		# 转换"Passed"字段为布尔值
+		latest_score['Passed'] = bool(latest_score['Passed'])
+		your_score = f"{latest_score['UserName']}同学，你的最新成绩为: {latest_score['Score']}分, {'恭喜通过' if latest_score['Passed'] else '很遗憾未通过'}。"
+
+		return your_score
+
+	except requests.exceptions.RequestException as e:
+		print(f"获取成绩时发生错误: {e}")
+		return None
+
+
 if __name__ == '__main__':
 	questions_data = get_formal_questions()
 	questions = questions_data['data']['questionList']
@@ -86,12 +116,14 @@ if __name__ == '__main__':
 	# 开始做题
 	for mq in matched_questions:
 		if mq['CorrectAnswerAVal'] is not None:
-			# 随机延迟1到15秒
-			delay = random.uniform(1, 15)
-			time.sleep(delay)
 			result = submit_answer(mq['QID'], mq['CorrectAnswerAVal'])
-			print(f"QID: {mq['QID']}, Correct Answer AVal: {mq['CorrectAnswerAVal']}, Submission Result: {result}")
+			print(f"题目: {mq['QContent']}\n正确答案: {mq['CorrectAnswer']}\nSubmission Result: {result['msg']}\n")
+			# 随机延迟1到10秒
+			delay = random.uniform(1, 10)
+			time.sleep(delay)
 		else:
-			print(f"QID: {mq['QID']} 没有找到匹配的答案。")
+			print(f"题目: {mq['QContent']}\n没有找到匹配的答案。\n")
 	# 交卷
 	finish_formal_test()
+	# 获取最新成绩
+	print(get_latest_score())
