@@ -21,4 +21,4 @@
 
 2、关于脚本运行
 
-脚本有两个版本，一个纯代码版，一个是GUI版。小白的话直接打开路径`dist/校史自动答题GUI版.exe`，双击运行，填入刚才复制的JSESSIONID即可。
+脚本有两个版本，一个纯代码版，一个是GUI版。小白的话点击下载[GUI版](https://github.com/Smartloe/The_question_bank_of_school_history_of_cqupt/releases/tag/answer)，双击运行，填入刚才复制的JSESSIONID即可。
