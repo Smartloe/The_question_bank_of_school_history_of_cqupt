@@ -16,7 +16,7 @@ headers = {
 	'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0',
 }
 cookies = {
-	'JSESSIONID': '20F13F9A11437D790D0B8D9C97AF589A',  # 此处填写你的JSESSIONID，在考试网页中可以通过浏览器开发者工具查看
+	'JSESSIONID': 'C883********************003C307',  # 此处填写你的JSESSIONID，在考试网页中可以通过浏览器开发者工具查看
 }
 
 
