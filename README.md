@@ -16,8 +16,9 @@
 1、关于JSESSIONID的获取
 
 先在[校史校情一点通](http://172.20.2.22:8080/index/index.html)进行登录，使用`F12`或`Fn+F12`打开控制台，然后选择`网路`那个Tab,最后刷新网页，随便选一个请求查看cookie，复制JSESSIONID。如下图所示：
+
 ![image](https://raw.githubusercontent.com/Smartloe/The_question_bank_of_school_history_of_cqupt/main/img/QQ_1720341542579.png)
-=======
+
 2、关于脚本运行
 
 脚本有两个版本，一个纯代码版，一个是GUI版。小白的话直接打开路径`dist/校史自动答题GUI版.exe`，双击运行，填入刚才复制的JSESSIONID即可。
