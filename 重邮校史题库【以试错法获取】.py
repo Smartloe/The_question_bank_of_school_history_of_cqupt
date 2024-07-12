@@ -75,7 +75,7 @@ def append_to_excel(data, filename='output.xlsx'):
 async def main():
 	async with aiohttp.ClientSession() as session:
 		print("正在获取题目...")
-		for i in range(300):  # 获取题库的次数，可以根据需要调整
+		for i in range(1000):  # 获取题库的次数，可以根据需要调整
 			print(f"第{i + 1}次获取题目...")
 			correct_answers = await determine_correct_answers(session)
 			print(correct_answers)
